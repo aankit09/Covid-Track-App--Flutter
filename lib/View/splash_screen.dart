@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:covid_traker_app/View/world_state.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
@@ -15,9 +18,20 @@ class _SplashScreenState extends State<SplashScreen>
         ..repeat();
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    Timer(
+        Duration(seconds: 5),
+        (() => Navigator.push(context,
+            MaterialPageRoute(builder: (context) => WorldStateScreen()))));
   }
 
   @override
@@ -45,7 +59,21 @@ class _SplashScreenState extends State<SplashScreen>
                   child: child,
                 );
               },
-            )
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * .04,
+            ),
+            const Align(
+              alignment: Alignment.center,
+              child: Text(
+                'Covid-19 Tracker',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 30,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
           ],
         ),
       ),
